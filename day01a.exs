@@ -1,4 +1,4 @@
-# Advent of Code - Day 01 - "No Time for a Taxicab"
+# Advent of Code - Day 01 - "No Time for a Taxicab" (Part A)
 
 defmodule Day01 do
 
