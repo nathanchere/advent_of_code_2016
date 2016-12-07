@@ -31,6 +31,6 @@ defmodule Day05A do
 end
 
 # expected: 18f47a30
-Day05A.main("day05.input.example")
+#Day05A.main("day05.input.example")
 
 Day05A.main("day05.input")
