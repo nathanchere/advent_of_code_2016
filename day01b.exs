@@ -9,10 +9,10 @@ defmodule Day01B do
   defp calculate_position([head|instructions], position, visited_positions) do
     new_position = move(position, head)
     {x,y,_} = new_position
-    if(Map.member?(visited_positions, {x,y})) do
+    if(MapSet.member?(visited_positions, {x,y})) do
       {x,y}
     else
-      calculate_position(instructions, new_position)
+      calculate_position(instructions, new_position, MapSet.put(visited_positions, {x,y}))
     end
   end
 
@@ -42,6 +42,7 @@ defmodule Day01B do
     get_input(file_name)
     |> Enum.map(fn(x)-> parse_instruction(x) end)
     |> calculate_position
+    |> IO.inspect
     |> calculate_distance
     |> IO.puts
   end
