@@ -1,6 +1,6 @@
 # Advent of Code - Day 01 - "No Time for a Taxicab" (Part B)
 
-defmodule Day01 do
+defmodule Day01B do
 
   def calculate_position(instructions) do
     calculate_position(instructions, {0,0,:N}, MapSet.new)
@@ -32,13 +32,14 @@ defmodule Day01 do
 
   defp calculate_distance({x,y}), do: abs(x) + abs(y)
 
-  def get_input do
-    File.read!("day01.input")
+  def get_input(file_name) do
+    File.read!(file_name)
+    |> String.strip
     |> String.split(", ")
   end
 
-  def main() do
-    get_input
+  def main(file_name) do
+    get_input(file_name)
     |> Enum.map(fn(x)-> parse_instruction(x) end)
     |> calculate_position
     |> calculate_distance
@@ -46,4 +47,7 @@ defmodule Day01 do
   end
 end
 
-Day01.main()
+# expected: 8
+Day01B.main("day01.input.example")
+
+Day01B.main("day01.input")
