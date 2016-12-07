@@ -2,11 +2,11 @@
 
 defmodule Day02A do
 
-  def parse_instruction(items) do
+  def parse_instruction(items, first_digit) do
     items
     |> String.strip
     |> String.graphemes
-    |> parse_instructions(5)
+    |> parse_instructions(first_digit)
    end
 
   defp parse_instructions([], digit), do: digit
@@ -25,18 +25,22 @@ defmodule Day02A do
   defp move("D", digit) when digit > 6, do: digit
   defp move("D", digit), do: digit + 3
 
-  def get_input do
-    File.read!("day02.input")
+  def get_input(file_name) do
+    File.read!(file_name)
     |> String.strip
     |> String.split("\n")
   end
 
-  def main() do
-    get_input
-    |> Enum.map(fn(x)-> parse_instruction(x) end)
-    |> Enum.join("-")
-    |> IO.puts
+  def main(file_name) do
+    [5|answer] =get_input(file_name)
+    |> Enum.reduce([5], fn(x, acc) -> [parse_instruction(x, hd(acc))] ++ acc end)
+    |> Enum.reverse
+
+    answer |> Enum.join("-") |> IO.puts
   end
 end
 
-Day02A.main()
+# expected: 1985
+Day02A.main("day02.input.example")
+
+Day02A.main("day02.input")
